@@ -45,5 +45,22 @@ describe("MyCollectible", function () {
     const tokenIdV2 = txV2.events[0].args[2].toNumber();
     expect(tokenIdV2).to.equal(2);
   });
+
+  it("Should return the tokenId 1 if v2 is not upgraded, not 2", async () => {
+    const transaction = await myCollectibleUpgradeable.mintToken();
+    const tx = await transaction.wait();
+    const tokenId = tx.events[0].args[2].toNumber();
+    expect(tokenId).to.equal(1);
+
+    const MyCollectibleV2 = await ethers.getContractFactory("MyCollectibleV2");
+    const myCollectibleUpgradeableV2 = await upgrades.deployProxy(MyCollectibleV2, [marketUpgradeable.address], {
+      initializer: "initialize",
+    });
+
+    const transactionV2 = await myCollectibleUpgradeableV2.mintToken();
+    const txV2 = await transactionV2.wait();
+    const tokenIdV2 = txV2.events[0].args[2].toNumber();
+    expect(tokenIdV2).to.equal(2);
+  })
 });
 
