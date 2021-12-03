@@ -46,7 +46,7 @@ describe("MyCollectible", function () {
     expect(tokenIdV2).to.equal(2);
   });
 
-  it("Should return the tokenId 1 if v2 is not upgraded, not 2", async () => {
+  it("Should return the tokenId 2 even if v2 is not upgraded", async () => {
     const transaction = await myCollectibleUpgradeable.mintToken();
     const tx = await transaction.wait();
     const tokenId = tx.events[0].args[2].toNumber();
