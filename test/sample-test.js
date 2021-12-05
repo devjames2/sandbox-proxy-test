@@ -103,6 +103,8 @@ describe("MyCollectible", function () {
 
     expect(tokenId).to.equal(1);
     expect(tokenIdV2).to.equal(1);
+
+    console.log("code for me");
   });
 });
 
