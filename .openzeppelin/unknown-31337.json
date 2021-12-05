@@ -7,7 +7,7 @@
       "hash": "0x1ff7c9a5a813ebf02b9cebcf7f4909e5b87fc88384e395eede4b0edbd0152ecd",
       "type": 2,
       "accessList": [],
-      "blockHash": "0xa9a17cd850a5b29d10b16333e2a7383bc7e7bb7f8cbf2fe60c8456e8f2b90710",
+      "blockHash": "0xc99a0bfbb2be568c593cecc39fd17c9fcbbc8dcf9380d5950a047a6baabe6ab2",
       "blockNumber": 2,
       "transactionIndex": 0,
       "confirmations": 1,
@@ -291,7 +291,7 @@
           {
             "contract": "MyCollectible",
             "label": "_tokenIds",
-            "type": "t_struct(Counter)1362_storage",
+            "type": "t_struct(Counter)1420_storage",
             "src": "contracts/MyCollectible.sol:12"
           },
           {
@@ -302,7 +302,7 @@
           }
         ],
         "types": {
-          "t_struct(Counter)1362_storage": {
+          "t_struct(Counter)1420_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -418,7 +418,7 @@
           {
             "contract": "MyCollectibleV2",
             "label": "_tokenIds",
-            "type": "t_struct(Counter)1362_storage",
+            "type": "t_struct(Counter)1420_storage",
             "src": "contracts/MyCollectibleV2.sol:12"
           },
           {
@@ -435,7 +435,7 @@
           }
         ],
         "types": {
-          "t_struct(Counter)1362_storage": {
+          "t_struct(Counter)1420_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
