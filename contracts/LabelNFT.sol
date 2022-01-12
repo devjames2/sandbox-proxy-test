@@ -10,13 +10,13 @@ contract LabelNFT is ERC1155Supply {
     Counters.Counter private _tokenIds;
 
     address contractAddress;
-    string name;
-    string symbol;
+    string _name;
+    string _symbol;
 
     constructor(address marketplaceAddress) ERC1155("https://abcoathup.github.io/SampleERC1155/api/token/{id}.json") {
         contractAddress = marketplaceAddress;
-        name = "LABLE TOKEN";
-        symbol = "LMT";
+        _name = "LABLE TOKEN";
+        _symbol = "LMT";
     }
 
     function mintToken(uint256 amount) public returns (uint256) {
@@ -26,4 +26,13 @@ contract LabelNFT is ERC1155Supply {
         setApprovalForAll(contractAddress, true);
         return newItemId;
     }
+
+    function name() external view returns (string memory) {
+      return _name;
+    }
+
+    function symbol() external view returns (string memory) {
+      return _symbol;
+    }
+
 }

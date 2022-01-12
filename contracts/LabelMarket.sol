@@ -88,9 +88,6 @@ contract LabelMarket is ReentrancyGuard, ERC1155Holder {
         );
     }
 
-    event WhatIsValue(uint256 _value);
-    event WhatIsPrice(uint256 _price);
-
     function createMarketSale(address nftContract, uint256 itemId)
       public
       payable
@@ -105,13 +102,13 @@ contract LabelMarket is ReentrancyGuard, ERC1155Holder {
         "Please submit the asking price in order to continue"
       );
 
-      console.log("idToMarketToken[itemId].seller is : ", idToMarketToken[itemId].seller);
-      console.log("idToMarketToken[itemId].seller.balance is : ", idToMarketToken[itemId].seller.balance);
+      // console.log("idToMarketToken[itemId].seller is : ", idToMarketToken[itemId].seller);
+      // console.log("idToMarketToken[itemId].seller.balance is : ", idToMarketToken[itemId].seller.balance);
 
       idToMarketToken[itemId].seller.transfer(msg.value);
 
-      console.log("msg.value is : ", msg.value);
-      console.log("idToMarketToken[itemId].seller.balance is : ", idToMarketToken[itemId].seller.balance);
+      // console.log("msg.value is : ", msg.value);
+      // console.log("idToMarketToken[itemId].seller.balance is : ", idToMarketToken[itemId].seller.balance);
       IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, amount, "");
       idToMarketToken[itemId].owner = payable(msg.sender);
       idToMarketToken[itemId].sold = true;
