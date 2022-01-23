@@ -1,5 +1,5 @@
 const { expect, assert } = require("chai");
-const { ethers, upgrades, waffle } = require("hardhat");
+const { ethers, waffle } = require("hardhat");
 const provider = waffle.provider;
 
 describe("Before go to the production env.", function () {
@@ -92,7 +92,6 @@ describe("Before go to the production env.", function () {
     await labelMarket
       .connect(buyerAddress)
       .createMarketSale(labelNFTAddress, 1, { value: auctionPrice });
-
       
     // Then
     const afterSellerBalance = await provider.getBalance(signer.address);
@@ -103,5 +102,47 @@ describe("Before go to the production env.", function () {
     assert.isTrue(beforeSellerBalance < afterSellerBalance);
     assert.equal(beforeMarketItems.length, 1);
     assert.equal(afterMarketItems.length, 0);
+  });
+
+  it("should mint at specific address", async () => {
+    // Given
+    const [_, creatorAddress] = await ethers.getSigners();
+    const transaction = await labelNFT.mintTokenAtCreator(32, creatorAddress.address);
+    const tx = await transaction.wait();
+
+    const isMinted = await labelNFT.exists(1);
+
+    assert.equal(isMinted, true);
+  });
+
+  it("should make a sell list using specific address", async () => {
+    // Given
+    const [_, creatorAddress] = await ethers.getSigners();
+    const auctionPrice = ethers.utils.parseUnits("10", "ether");
+    const transaction = await labelNFT.mintTokenAtCreator(
+      32,
+      creatorAddress.address
+    );
+    const tx = await transaction.wait();
+
+    const isMinted = await labelNFT.exists(1);
+
+    const transaction2 = await labelMarket
+      .connect(creatorAddress)
+      .makeMarketItemForCreator(
+        labelNFTAddress,
+        1,
+        auctionPrice,
+        32,
+        creatorAddress.address
+      );
+
+    // const tx2 = await transaction2.wait();
+
+    const afterMarketItems = await labelMarket.fetchMarketTokens();
+
+    // console.log(beforeMarketItems);
+
+    assert.equal(afterMarketItems.length, 1);
   });
 });
